@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using FoodFlow.Models;
+using FoodFlow.Repos;
 using FoodFlow.ViewModels;
 
 namespace FoodFlow
@@ -8,7 +9,7 @@ namespace FoodFlow
     public class MainViewModel : INotifyPropertyChanged
     {
         private Order? _currentOrder { get; set; }
-
+        private DishesRepository _dishesRepository = new DishesRepository();
         public Order? CurrentOrder
         {
             get => _currentOrder;
@@ -49,7 +50,16 @@ namespace FoodFlow
 
         private void AddItem(Dish dish)
         {
-            CurrentOrder!.Items.Add(new OrderItem { Dish = dish, Amount = 1});
+            CurrentOrder!.Items.Add(new OrderItem 
+            { 
+                Dish = _dishesRepository.GetAll().Skip(Random.Shared.Next(10)).First(), 
+                Amount = 1
+            });
+
+            // хак с занулением переделать на норльманое нотифай проперти ченджед 
+            var co = CurrentOrder;
+            CurrentOrder = null;
+            CurrentOrder = co;
         }
 
         private void RemoveItem(OrderItem item)

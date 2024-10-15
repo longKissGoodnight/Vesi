@@ -13,15 +13,21 @@
     </Window.DataContext>
 
     <Grid>
-        <ContentControl Content="{Binding CurrentView}" DataContext="{Binding}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Grid Background="Violet" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TextBlock FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center">Тут заголовок приложения, какаято инфа и часы</TextBlock>
+        </Grid>
+        <ContentControl Background="Gray" Grid.Row="1" Content="{Binding CurrentView}" DataContext="{Binding}">
 
         </ContentControl>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
-            <Button Content="Показать заказ" Command="{Binding ShowOrderCommand}" />
-            <Button Content="Добавить блюдо" Command="{Binding AddDishCommand}" />
-            <Button Content="Пустой экран" Command="{Binding ShowEmptyScreenCommand}" />
-        </StackPanel>
+        <Grid Background="Gainsboro" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24">Тут футер приложения, какаято инфа и часы</TextBlock>
+        </Grid>
     </Grid>
 
 </Window>

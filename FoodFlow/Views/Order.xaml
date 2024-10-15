@@ -3,7 +3,24 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DataTemplate DataType="{x:Type vm:OrderViewModel}">
         <Grid DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Window}}">
-            <TextBlock>Order here</TextBlock>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0">Order here</TextBlock>
+            <ListBox Grid.Row="1" ItemsSource="{Binding CurrentOrder.Items}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Dish.Name}" FontWeight="Bold" />
+                            <TextBlock Text=" - " />
+                            <TextBlock Text="{Binding Dish.Description}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Grid.Row="2" Content="Добавить блюдо" Command="{Binding AddItemCommand}" />
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

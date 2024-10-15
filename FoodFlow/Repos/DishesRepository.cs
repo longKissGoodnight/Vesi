@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using FoodFlow.Models;
 
 namespace FoodFlow.Repos
@@ -7,7 +8,13 @@ namespace FoodFlow.Repos
     {
         public IEnumerable<Dish> GetAll()
         {
-            return JsonSerializer.Deserialize<List<Dish>>(System.IO.File.ReadAllText("Menu\\Menu.json"))!;
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new JsonStringEnumConverter() },
+                WriteIndented = true // Для удобства чтения результата
+            };
+
+            return JsonSerializer.Deserialize<List<Dish>>(System.IO.File.ReadAllText("Menu\\Menu.json"), options);
         }
     }
 }
