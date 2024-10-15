@@ -3,8 +3,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DataTemplate DataType="{x:Type vm:WellcomeViewModel}">
         <StackPanel DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Window}}">
-            <TextBlock>Wellcome!</TextBlock>
-            <Button Command="{Binding NewOrderCommand}">
+            <TextBlock HorizontalAlignment="Center" FontSize="50" Margin="50">Wellcome!</TextBlock>
+            <Button Command="{Binding NewOrderCommand}" HorizontalAlignment="Center" FontSize="24" Margin="20">
                 Новый заказ
             </Button>
         </StackPanel>

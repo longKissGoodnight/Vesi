@@ -6,7 +6,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="20"/>
+                <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0">Order here</TextBlock>
             <ListBox Grid.Row="1" ItemsSource="{Binding CurrentOrder.Items}">
@@ -20,7 +20,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Grid.Row="2" Content="Добавить блюдо" Command="{Binding AddItemCommand}" />
+            <Button Grid.Row="2" FontSize="20" HorizontalAlignment="Center" Margin="10" Content="Добавить блюдо" Command="{Binding AddItemCommand}" />
         </Grid>
     </DataTemplate>
 </ResourceDictionary>
