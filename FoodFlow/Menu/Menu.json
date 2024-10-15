@@ -1,0 +1,72 @@
+[
+  {
+    "Id": 1,
+    "Name": "Салат Цезарь",
+    "Description": "Классический салат с листьями салата, сухариками и пармезаном.",
+    "Serving": "Unit",
+    "Type": "Appetizer"
+  },
+  {
+    "Id": 2,
+    "Name": "Томатный суп",
+    "Description": "Насыщенный томатный суп с базиликом и чесноком.",
+    "Serving": "Weight",
+    "Type": "Soup"
+  },
+  {
+    "Id": 3,
+    "Name": "Курица-гриль",
+    "Description": "Куриное филе, приготовленное на гриле с травами и специями.",
+    "Serving": "Unit",
+    "Type": "MainCourse"
+  },
+  {
+    "Id": 4,
+    "Name": "Пюре картофельное",
+    "Description": "Нежное картофельное пюре с маслом.",
+    "Serving": "Weight",
+    "Type": "SideDish"
+  },
+  {
+    "Id": 5,
+    "Name": "Апельсиновый сок",
+    "Description": "Свежевыжатый апельсиновый сок.",
+    "Serving": "Unit",
+    "Type": "Drink"
+  },
+  {
+    "Id": 6,
+    "Name": "Шоколадный торт",
+    "Description": "Влажный и насыщенный шоколадный торт.",
+    "Serving": "Unit",
+    "Type": "Dessert"
+  },
+  {
+    "Id": 7,
+    "Name": "Кетчуп",
+    "Description": "Томатный соус для дипов или приправ.",
+    "Serving": "Unit",
+    "Type": "Sauce"
+  },
+  {
+    "Id": 8,
+    "Name": "Чесночный хлеб",
+    "Description": "Тостовый хлеб с чесночным маслом.",
+    "Serving": "Unit",
+    "Type": "Bread"
+  },
+  {
+    "Id": 9,
+    "Name": "Жареная рыба",
+    "Description": "Хрустящие жареные рыбные филе с лимоном.",
+    "Serving": "Unit",
+    "Type": "MainCourse"
+  },
+  {
+    "Id": 10,
+    "Name": "Огуречный салат",
+    "Description": "Свежий огуречный салат с укропом и уксусом.",
+    "Serving": "Weight",
+    "Type": "Appetizer"
+  }
+]

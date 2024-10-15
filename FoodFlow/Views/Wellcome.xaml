@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:vm="clr-namespace:FoodFlow.ViewModels"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate DataType="{x:Type vm:WellcomeViewModel}">
+        <StackPanel DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Window}}">
+            <TextBlock>Wellcome!</TextBlock>
+            <Button Command="{Binding NewOrderCommand}">
+                Новый заказ
+            </Button>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

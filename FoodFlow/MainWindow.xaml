@@ -1,0 +1,27 @@
+﻿<Window x:Class="FoodFlow.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:FoodFlow.ViewModels"
+        xmlns:local="clr-namespace:FoodFlow"
+        mc:Ignorable="d"
+        Title="Весы" Height="720" Width="1180">
+
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <ContentControl Content="{Binding CurrentView}" DataContext="{Binding}">
+
+        </ContentControl>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
+            <Button Content="Показать заказ" Command="{Binding ShowOrderCommand}" />
+            <Button Content="Добавить блюдо" Command="{Binding AddDishCommand}" />
+            <Button Content="Пустой экран" Command="{Binding ShowEmptyScreenCommand}" />
+        </StackPanel>
+    </Grid>
+
+</Window>
