@@ -65,6 +65,10 @@ namespace FoodFlow
         private void RemoveItem(OrderItem item)
         {
             CurrentOrder!.Items.Remove(item);
+
+            var co = CurrentOrder;
+            CurrentOrder = null;
+            CurrentOrder = co;
         }
 
         // Метод для очистки заказа

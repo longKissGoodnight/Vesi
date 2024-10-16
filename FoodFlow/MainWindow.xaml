@@ -18,12 +18,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
+        
         <Grid Background="Violet" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TextBlock FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center">Тут заголовок приложения, какая-то инфа и часы</TextBlock>
         </Grid>
-        <ContentControl Background="Gray" Grid.Row="1" Content="{Binding CurrentView}" DataContext="{Binding}">
-
-        </ContentControl>
+        
+        <ContentControl Background="Gray" Grid.Row="1" Content="{Binding CurrentView}" DataContext="{Binding}"/>
 
         <Grid Background="Gainsboro" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24">Тут футер приложения, какая-то инфа и часы</TextBlock>

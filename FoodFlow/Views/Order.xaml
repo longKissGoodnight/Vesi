@@ -16,6 +16,10 @@
                             <TextBlock Text="{Binding Dish.Name}" FontWeight="Bold" />
                             <TextBlock Text=" - " />
                             <TextBlock Text="{Binding Dish.Description}" />
+                            <TextBlock Text="{Binding Amount}" />
+                            <Button CommandParameter="{Binding}">+</Button>
+                            <Button CommandParameter="{Binding}">-</Button>
+                            <Button Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}">Удалить</Button>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
