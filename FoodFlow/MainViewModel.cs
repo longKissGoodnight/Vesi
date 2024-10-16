@@ -15,8 +15,11 @@ namespace FoodFlow
             get => _currentOrder;
             set
             {
-                _currentOrder = value;
-                OnPropertyChanged(nameof(CurrentOrder));
+                if (_currentOrder != value)
+                {
+                    _currentOrder = value;
+                    OnPropertyChanged(nameof(CurrentOrder));
+                }
             }
         }
 
@@ -26,8 +29,11 @@ namespace FoodFlow
             get => _currentView;
             set
             {
-                _currentView = value;
-                OnPropertyChanged(nameof(CurrentView));
+                if (_currentView != value)
+                {
+                    _currentView = value;
+                    OnPropertyChanged(nameof(CurrentView));
+                }
             }
         }
 
@@ -36,6 +42,8 @@ namespace FoodFlow
         public ICommand CancelOrderCommand { get; }
         public ICommand RemoveItemCommand { get; }
         public ICommand ClearOrderCommand { get; }
+        public ICommand IncreaseAmountCommand { get; }
+        public ICommand DecreaseAmountCommand { get; }
 
         public MainViewModel()
         {
@@ -44,31 +52,30 @@ namespace FoodFlow
             ClearOrderCommand = new RelayCommand(ClearOrder);
             NewOrderCommand = new RelayCommand(NewOrder);
             CancelOrderCommand = new RelayCommand(CancelOrder);
+            IncreaseAmountCommand = new RelayCommand<OrderItem>(IncreaseAmount);
+            DecreaseAmountCommand = new RelayCommand<OrderItem>(DecreaseAmount);
 
             _currentView = new WellcomeViewModel();
         }
 
         private void AddItem(Dish dish)
         {
-            CurrentOrder!.Items.Add(new OrderItem 
-            { 
-                Dish = _dishesRepository.GetAll().Skip(Random.Shared.Next(10)).First(), 
+            // Добавляем новый элемент в коллекцию
+            CurrentOrder!.Items.Add(new OrderItem
+            {
+                Dish = _dishesRepository.GetAll().Skip(Random.Shared.Next(10)).First(),
                 Amount = 1
             });
 
-            // хак с занулением переделать на норльманое нотифай проперти ченджед 
-            var co = CurrentOrder;
-            CurrentOrder = null;
-            CurrentOrder = co;
+            // Уведомляем об изменении свойства CurrentOrder
+            OnPropertyChanged(nameof(CurrentOrder));
         }
+
 
         private void RemoveItem(OrderItem item)
         {
             CurrentOrder!.Items.Remove(item);
-
-            var co = CurrentOrder;
-            CurrentOrder = null;
-            CurrentOrder = co;
+            OnPropertyChanged(nameof(CurrentOrder));
         }
 
         // Метод для очистки заказа
@@ -80,6 +87,22 @@ namespace FoodFlow
         private void CancelOrder()
         {
             //CurrentOrder.Clear();
+        }
+
+        private void IncreaseAmount(OrderItem item)
+        {
+            if (item != null)
+            {
+                item.Amount++;
+            }
+        }
+
+        private void DecreaseAmount(OrderItem item)
+        {
+            if (item != null && item.Amount > 1)
+            {
+                item.Amount--;
+            }
         }
 
         private void NewOrder()
