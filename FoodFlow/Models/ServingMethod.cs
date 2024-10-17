@@ -2,7 +2,8 @@
 {
     public enum ServingMethod
     {
-        Weight,       // Весовой
-        Unit,         // Штучный
+        Weight, // Вес
+        Unit    // Штучный товар
     }
+
 }

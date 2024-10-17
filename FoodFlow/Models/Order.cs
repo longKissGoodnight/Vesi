@@ -12,6 +12,8 @@ namespace FoodFlow.Models
         public ObservableCollection<OrderItem> Items { get; set; } = new();
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        
+        // поменять, сделать wrapper 
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

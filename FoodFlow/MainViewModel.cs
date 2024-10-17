@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Input;
 using FoodFlow.Models;
 using FoodFlow.Repos;
@@ -9,7 +10,25 @@ namespace FoodFlow
     public class MainViewModel : INotifyPropertyChanged
     {
         private Order? _currentOrder { get; set; }
+        private ObservableCollection<Dish> _dishes;
+
         private DishesRepository _dishesRepository = new DishesRepository();
+
+        //New
+        public ObservableCollection<Dish> Dishes
+        {
+            get => _dishes;
+            set
+            {
+                if (_dishes != value)
+                {
+                    _dishes = value;
+                    OnPropertyChanged(nameof(Dishes));
+                }
+            }
+        }
+
+
         public Order? CurrentOrder
         {
             get => _currentOrder;
@@ -44,6 +63,8 @@ namespace FoodFlow
         public ICommand ClearOrderCommand { get; }
         public ICommand IncreaseAmountCommand { get; }
         public ICommand DecreaseAmountCommand { get; }
+        public ICommand SelectDishCommand { get; }
+
 
         public MainViewModel()
         {
@@ -54,21 +75,45 @@ namespace FoodFlow
             CancelOrderCommand = new RelayCommand(CancelOrder);
             IncreaseAmountCommand = new RelayCommand<OrderItem>(IncreaseAmount);
             DecreaseAmountCommand = new RelayCommand<OrderItem>(DecreaseAmount);
+            SelectDishCommand = new RelayCommand<Dish>(AddItem); // Здесь вы используете AddItem
+
+            //new
+            Dishes = new ObservableCollection<Dish>(_dishesRepository.GetAll());
+
 
             _currentView = new WellcomeViewModel();
+
         }
 
         private void AddItem(Dish dish)
         {
-            // Добавляем новый элемент в коллекцию
-            CurrentOrder!.Items.Add(new OrderItem
-            {
-                Dish = _dishesRepository.GetAll().Skip(Random.Shared.Next(10)).First(),
-                Amount = 1
-            });
+            /*            // Добавляем новый элемент в коллекцию
+                        CurrentOrder!.Items.Add(new OrderItem
+                        {
+                            Dish = _dishesRepository.GetAll().Skip(Random.Shared.Next(10)).First(),
+                            Amount = 1
+                        });
 
-            // Уведомляем об изменении свойства CurrentOrder
-            OnPropertyChanged(nameof(CurrentOrder));
+                        // Уведомляем об изменении свойства CurrentOrder
+                        OnPropertyChanged(nameof(CurrentOrder));*/
+
+            CurrentView = new AddDishViewModel();
+
+            if (dish != null && CurrentOrder != null)
+            {
+                // Добавляем новое блюдо в текущий заказ
+                CurrentOrder.Items.Add(new OrderItem
+                {
+                    Dish = dish,
+                    Amount = 1
+                });
+
+                // Уведомляем об изменении свойства CurrentOrder
+                OnPropertyChanged(nameof(CurrentOrder));
+
+                // Вернуться к OrderView
+                CurrentView = new OrderViewModel(); // Здесь вы можете использовать OrderViewModel
+            }
         }
 
 

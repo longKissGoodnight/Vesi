@@ -1,0 +1,53 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:vm="clr-namespace:FoodFlow.ViewModels"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DataTemplate DataType="{x:Type vm:AddDishViewModel}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="20">
+            <!-- WrapPanel в качестве панели для ItemsControl -->
+            <ItemsControl ItemsSource="{Binding DataContext.Dishes, RelativeSource={RelativeSource AncestorType=Window}}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding DataContext.SelectDishCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                            CommandParameter="{Binding}"
+                            Margin="10"
+                            Width="150"
+                            Height="50"
+                            FontSize="16">
+                            <StackPanel>
+                                <!-- Название блюда, выравнивание по центру -->
+                                <TextBlock Text="{Binding Name}" 
+                                    HorizontalAlignment="Center"
+                                    FontWeight="Bold" 
+                                    FontSize="14"/>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,5,0,0">
+                                    <!-- Отображение типа блюда (Вес/Шт) -->
+                                    <TextBlock Text="{Binding ServingShort}" 
+                                        HorizontalAlignment="Left" 
+                                        Margin="5,0" />
+
+                                    <!-- Отображение цены -->
+                                    <TextBlock Text="{Binding Price}" 
+                                        HorizontalAlignment="Right" 
+                                        Margin="0,0,1,0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Button>
+
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DataTemplate>
+</ResourceDictionary>
+
+
+
