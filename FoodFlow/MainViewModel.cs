@@ -4,6 +4,8 @@ using System.Windows.Input;
 using FoodFlow.Models;
 using FoodFlow.Repos;
 using FoodFlow.ViewModels;
+using FoodFlow.ViewModels.Layout;
+
 
 namespace FoodFlow
 {
@@ -126,12 +128,16 @@ namespace FoodFlow
         // Метод для очистки заказа
         private void ClearOrder()
         {
-            //CurrentOrder.Clear();
+            CurrentOrder?.Items.Clear();
+            OnPropertyChanged(nameof(CurrentOrder));
         }
 
         private void CancelOrder()
         {
             //CurrentOrder.Clear();
+
+            CurrentOrder = null;
+            CurrentView = new WellcomeLayoutViewModel();
         }
 
         private void IncreaseAmount(OrderItemViewModel item)

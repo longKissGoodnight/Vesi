@@ -47,7 +47,29 @@
                 </ListBox.ItemTemplate>
 
             </ListBox>
-            <Button Grid.Row="2" FontSize="20" HorizontalAlignment="Center" Margin="10" Content="Добавить блюдо" Command="{Binding AddItemCommand}" />
+            <!-- Разметка для кнопок управления заказом -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <!-- Левая колонка для кнопки "Отменить заказ" -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Центральная колонка для кнопки "Добавить блюдо" -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Правая колонка для кнопки "Очистить" -->
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Кнопка "Отменить заказ" (слева) -->
+                <Button Content="Отменить заказ" Command="{Binding CancelOrderCommand}" FontSize="20" Width="150" HorizontalAlignment="Left" Margin="10"
+                        Grid.Column="0"/>
+
+                <!-- Кнопка "Добавить блюдо" (по центру) -->
+                <Button Content="Добавить блюдо" Command="{Binding AddItemCommand}" FontSize="20" Width="150" HorizontalAlignment="Center" Margin="10"
+                        Grid.Column="1"/>
+
+                <!-- Кнопка "Очистить" (справа) -->
+                <Button Content="Очистить" Command="{Binding ClearOrderCommand}" FontSize="20" Width="150" HorizontalAlignment="Right" Margin="10"
+                        Grid.Column="2"/>
+            </Grid>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>
