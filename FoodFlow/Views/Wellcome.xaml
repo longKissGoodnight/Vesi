@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:vm="clr-namespace:FoodFlow.ViewModels"
+                    xmlns:layout="clr-namespace:FoodFlow.ViewModels.Layout"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <DataTemplate DataType="{x:Type vm:WellcomeViewModel}">
+    <DataTemplate DataType="{x:Type layout:WellcomeViewModel}">
         <StackPanel DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Window}}">
             <TextBlock HorizontalAlignment="Center" FontSize="50" Margin="50">Wellcome!</TextBlock>
             <Button Command="{Binding NewOrderCommand}" HorizontalAlignment="Center" FontSize="24" Margin="20">

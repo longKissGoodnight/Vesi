@@ -1,29 +1,9 @@
-﻿using System.ComponentModel;
-
-namespace FoodFlow.Models
+﻿namespace FoodFlow.Models
 {
-    public class OrderItem : INotifyPropertyChanged
+    public class OrderItem
     {
-        private int _amount;
-        public Dish Dish { get; set; }
+        public Dish Dish { get; set; } = Dish.Empty;
 
-        public int Amount
-        {
-            get => _amount;
-            set
-            {
-                if (_amount != value)
-                {
-                    _amount = value;
-                    OnPropertyChanged(nameof(Amount));
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public int Amount { get; set; }
     }
 }

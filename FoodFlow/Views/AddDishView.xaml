@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:vm="clr-namespace:FoodFlow.ViewModels"
+                    xmlns:layout="clr-namespace:FoodFlow.ViewModels.Layout"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <DataTemplate DataType="{x:Type vm:AddDishViewModel}">
+    <DataTemplate DataType="{x:Type layout:AddDishViewModel}">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="20">
             <!-- WrapPanel в качестве панели для ItemsControl -->
             <ItemsControl ItemsSource="{Binding DataContext.Dishes, RelativeSource={RelativeSource AncestorType=Window}}">

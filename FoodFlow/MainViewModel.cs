@@ -9,7 +9,7 @@ namespace FoodFlow
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private Order? _currentOrder { get; set; }
+        private OrderViewModel? _currentOrder { get; set; }
         private ObservableCollection<Dish> _dishes;
 
         private DishesRepository _dishesRepository = new DishesRepository();
@@ -29,7 +29,7 @@ namespace FoodFlow
         }
 
 
-        public Order? CurrentOrder
+        public OrderViewModel? CurrentOrder
         {
             get => _currentOrder;
             set
@@ -69,19 +69,19 @@ namespace FoodFlow
         public MainViewModel()
         {
             AddItemCommand = new RelayCommand<Dish>(AddItem);
-            RemoveItemCommand = new RelayCommand<OrderItem>(RemoveItem);
+            RemoveItemCommand = new RelayCommand<OrderItemViewModel>(RemoveItem);
             ClearOrderCommand = new RelayCommand(ClearOrder);
             NewOrderCommand = new RelayCommand(NewOrder);
             CancelOrderCommand = new RelayCommand(CancelOrder);
-            IncreaseAmountCommand = new RelayCommand<OrderItem>(IncreaseAmount);
-            DecreaseAmountCommand = new RelayCommand<OrderItem>(DecreaseAmount);
+            IncreaseAmountCommand = new RelayCommand<OrderItemViewModel>(IncreaseAmount);
+            DecreaseAmountCommand = new RelayCommand<OrderItemViewModel>(DecreaseAmount);
             SelectDishCommand = new RelayCommand<Dish>(AddItem); // Здесь вы используете AddItem
 
             //new
             Dishes = new ObservableCollection<Dish>(_dishesRepository.GetAll());
 
 
-            _currentView = new WellcomeViewModel();
+            _currentView = new ViewModels.Layout.WellcomeViewModel();
 
         }
 
@@ -97,12 +97,12 @@ namespace FoodFlow
                         // Уведомляем об изменении свойства CurrentOrder
                         OnPropertyChanged(nameof(CurrentOrder));*/
 
-            CurrentView = new AddDishViewModel();
+            CurrentView = new ViewModels.Layout.AddDishViewModel();
 
             if (dish != null && CurrentOrder != null)
             {
                 // Добавляем новое блюдо в текущий заказ
-                CurrentOrder.Items.Add(new OrderItem
+                CurrentOrder.Items.Add(new OrderItemViewModel
                 {
                     Dish = dish,
                     Amount = 1
@@ -112,12 +112,12 @@ namespace FoodFlow
                 OnPropertyChanged(nameof(CurrentOrder));
 
                 // Вернуться к OrderView
-                CurrentView = new OrderViewModel(); // Здесь вы можете использовать OrderViewModel
+                CurrentView = new ViewModels.Layout.OrderViewModel(); // Здесь вы можете использовать OrderViewModel
             }
         }
 
 
-        private void RemoveItem(OrderItem item)
+        private void RemoveItem(OrderItemViewModel item)
         {
             CurrentOrder!.Items.Remove(item);
             OnPropertyChanged(nameof(CurrentOrder));
@@ -134,7 +134,7 @@ namespace FoodFlow
             //CurrentOrder.Clear();
         }
 
-        private void IncreaseAmount(OrderItem item)
+        private void IncreaseAmount(OrderItemViewModel item)
         {
             if (item != null)
             {
@@ -142,7 +142,7 @@ namespace FoodFlow
             }
         }
 
-        private void DecreaseAmount(OrderItem item)
+        private void DecreaseAmount(OrderItemViewModel item)
         {
             if (item != null && item.Amount > 1)
             {
@@ -152,8 +152,8 @@ namespace FoodFlow
 
         private void NewOrder()
         {
-            CurrentOrder = new Order();
-            CurrentView = new OrderViewModel();
+            CurrentOrder = new OrderViewModel();
+            CurrentView = new ViewModels.Layout.OrderViewModel();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
