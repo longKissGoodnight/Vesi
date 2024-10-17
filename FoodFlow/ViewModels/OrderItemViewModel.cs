@@ -6,7 +6,7 @@ namespace FoodFlow.ViewModels
     public class OrderItemViewModel : INotifyPropertyChanged
     {
         private int _amount;
-        public Dish Dish { get; set; }
+        public Dish Dish { get; set; } = Dish.Empty;
 
         public int Amount
         {

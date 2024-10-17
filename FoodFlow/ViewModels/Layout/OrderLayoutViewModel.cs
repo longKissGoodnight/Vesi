@@ -1,6 +1,6 @@
 ﻿namespace FoodFlow.ViewModels.Layout
 {
-    public class OrderViewModel
+    public class OrderLayoutViewModel
     {
     }
 }

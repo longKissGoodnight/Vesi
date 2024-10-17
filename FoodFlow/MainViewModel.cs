@@ -81,7 +81,7 @@ namespace FoodFlow
             Dishes = new ObservableCollection<Dish>(_dishesRepository.GetAll());
 
 
-            _currentView = new ViewModels.Layout.WellcomeViewModel();
+            _currentView = new ViewModels.Layout.WellcomeLayoutViewModel();
 
         }
 
@@ -97,7 +97,7 @@ namespace FoodFlow
                         // Уведомляем об изменении свойства CurrentOrder
                         OnPropertyChanged(nameof(CurrentOrder));*/
 
-            CurrentView = new ViewModels.Layout.AddDishViewModel();
+            CurrentView = new ViewModels.Layout.AddDishLayoutViewModel();
 
             if (dish != null && CurrentOrder != null)
             {
@@ -112,7 +112,7 @@ namespace FoodFlow
                 OnPropertyChanged(nameof(CurrentOrder));
 
                 // Вернуться к OrderView
-                CurrentView = new ViewModels.Layout.OrderViewModel(); // Здесь вы можете использовать OrderViewModel
+                CurrentView = new ViewModels.Layout.OrderLayoutViewModel(); // Здесь вы можете использовать OrderViewModel
             }
         }
 
@@ -153,7 +153,7 @@ namespace FoodFlow
         private void NewOrder()
         {
             CurrentOrder = new OrderViewModel();
-            CurrentView = new ViewModels.Layout.OrderViewModel();
+            CurrentView = new ViewModels.Layout.OrderLayoutViewModel();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

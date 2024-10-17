@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:layout="clr-namespace:FoodFlow.ViewModels.Layout"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <DataTemplate DataType="{x:Type layout:OrderViewModel}">
+    <DataTemplate DataType="{x:Type layout:OrderLayoutViewModel}">
         <Grid DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Window}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>

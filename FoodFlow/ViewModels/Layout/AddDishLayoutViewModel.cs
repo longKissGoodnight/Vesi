@@ -1,9 +1,7 @@
 ﻿namespace FoodFlow.ViewModels.Layout
 {
-    public class AddDishViewModel
+    public class AddDishLayoutViewModel
     {
         
     }
 }
-
-
