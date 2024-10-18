@@ -6,28 +6,53 @@
         xmlns:vm="clr-namespace:FoodFlow.ViewModels"
         xmlns:local="clr-namespace:FoodFlow"
         mc:Ignorable="d"
-        Title="Весы" Height="720" Width="1180">
+        Title="Терминал формирования заказов" Height="720" Width="1180"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0F0F0">
 
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
 
     <Grid>
+        <!-- Верхний заголовок -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        
-        <Grid Background="Violet" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <TextBlock FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center">Тут заголовок приложения, какая-то инфа и часы</TextBlock>
-        </Grid>
-        
-        <ContentControl Background="Gray" Grid.Row="1" Content="{Binding CurrentView}" DataContext="{Binding}"/>
 
-        <Grid Background="Gainsboro" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24">Тут футер приложения, какая-то инфа и часы</TextBlock>
-        </Grid>
+        <!-- Заголовок с тенью и градиентом -->
+        <Border Grid.Row="0" Background="#4A90E2" CornerRadius="0,0,10,10" Effect="{DynamicResource DropShadowEffect}">
+            <Grid>
+                <TextBlock FontSize="26" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    Терминал формирования заказов
+                </TextBlock>
+            </Grid>
+        </Border>
+
+        <!-- Основное содержимое -->
+        <Border Grid.Row="1" Background="White" Margin="10" CornerRadius="10" Padding="20" Effect="{DynamicResource DropShadowEffect}">
+            <ContentControl Content="{Binding CurrentView}" DataContext="{Binding}" />
+        </Border>
+
+        <!-- Нижний футер с временем -->
+        <Border Grid.Row="2" Background="#4A90E2" CornerRadius="10,10,0,0" Effect="{DynamicResource DropShadowEffect}">
+            <Grid>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="White">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="Информация о системе | Время: {0}">
+                            <Binding Path="CurrentTime"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </Grid>
+        </Border>
     </Grid>
+
+    <Window.Resources>
+        <!-- Эффект тени для элементов -->
+        <DropShadowEffect x:Key="DropShadowEffect" ShadowDepth="5" Color="Black" Opacity="0.2" BlurRadius="10" />
+    </Window.Resources>
 
 </Window>

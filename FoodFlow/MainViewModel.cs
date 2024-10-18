@@ -1,11 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using FoodFlow.Models;
 using FoodFlow.Repos;
+using FoodFlow.Services;
 using FoodFlow.ViewModels;
 using FoodFlow.ViewModels.Layout;
-
 
 namespace FoodFlow
 {
@@ -58,6 +59,18 @@ namespace FoodFlow
             }
         }
 
+        private readonly TimerService _timerService;
+        private string _currentTime;
+        public string CurrentTime
+        {
+            get => _currentTime;
+            set
+            {
+                _currentTime = value;
+                OnPropertyChanged(nameof(CurrentTime));
+            }
+        }
+
         public ICommand AddItemCommand { get; }
         public ICommand NewOrderCommand { get; }
         public ICommand CancelOrderCommand { get; }
@@ -84,6 +97,10 @@ namespace FoodFlow
 
 
             _currentView = new ViewModels.Layout.WellcomeLayoutViewModel();
+
+            _timerService = new TimerService();
+            _timerService.TimeUpdated += UpdateTime;
+            _currentTime = DateTime.Now.ToString("HH:mm:ss");
 
         }
 
@@ -155,6 +172,12 @@ namespace FoodFlow
                 item.Amount--;
             }
         }
+
+        private void UpdateTime(string newTime)
+        {
+            CurrentTime = newTime;
+        }
+
 
         private void NewOrder()
         {

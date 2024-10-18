@@ -2,6 +2,41 @@
                     xmlns:layout="clr-namespace:FoodFlow.ViewModels.Layout"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Style x:Key="DishButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="#4A90E2"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="MinHeight" Value="50"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="#007BB8"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="10" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#357ABD"/>
+                <Setter Property="BorderBrush" Value="#005B7F"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#2E6A93"/>
+                <Setter Property="BorderBrush" Value="#00475D"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <DataTemplate DataType="{x:Type layout:AddDishLayoutViewModel}">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="20">
             <!-- WrapPanel в качестве панели для ItemsControl -->
@@ -15,39 +50,35 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Command="{Binding DataContext.SelectDishCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                            CommandParameter="{Binding}"
-                            Margin="10"
-                            Width="150"
-                            Height="50"
-                            FontSize="16">
+                                CommandParameter="{Binding}"
+                                Style="{StaticResource DishButtonStyle}">
                             <StackPanel>
                                 <!-- Название блюда, выравнивание по центру -->
                                 <TextBlock Text="{Binding Name}" 
-                                    HorizontalAlignment="Center"
-                                    FontWeight="Bold" 
-                                    FontSize="14"/>
+                                           HorizontalAlignment="Center"
+                                           FontWeight="Bold" 
+                                           FontSize="14"/>
 
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,5,0,0">
+                                <!-- Панель для типа блюда и цены -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,5,0,0">
                                     <!-- Отображение типа блюда (Вес/Шт) -->
                                     <TextBlock Text="{Binding ServingShort}" 
-                                        HorizontalAlignment="Left" 
-                                        Margin="5,0" />
+                                               HorizontalAlignment="Left" 
+                                               Margin="5,0" 
+                                               FontSize="12" 
+                                               Foreground="LightGray"/>
 
                                     <!-- Отображение цены -->
                                     <TextBlock Text="{Binding Price}" 
-                                        HorizontalAlignment="Right" 
-                                        Margin="0,0,1,0"/>
+                                               HorizontalAlignment="Left" 
+                                               Margin="10,0,0,0" 
+                                               FontWeight="Bold"/>
                                 </StackPanel>
                             </StackPanel>
                         </Button>
-
-
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
     </DataTemplate>
 </ResourceDictionary>
-
-
-
