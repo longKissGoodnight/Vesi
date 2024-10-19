@@ -108,6 +108,11 @@
                 <Button Content="Очистить" Command="{Binding ClearOrderCommand}" 
                         FontSize="20" Margin="10" Width="150" Height="50"
                         Style="{StaticResource RoundedButtonStyle}"/>
+                
+                <!-- Кнопка "Закончить заказ" -->
+                <Button Content="Закончить заказ" Command="{Binding CompleteOrderCommand}"
+                        FontSize="20" Margin="10" Width="200" Height="50"
+                        Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
         </Grid>
     </DataTemplate>

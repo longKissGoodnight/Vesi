@@ -17,6 +17,9 @@ namespace FoodFlow
 
         private DishesRepository _dishesRepository = new DishesRepository();
 
+        private decimal _totalPrice;
+
+
         //New
         public ObservableCollection<Dish> Dishes
         {
@@ -71,6 +74,21 @@ namespace FoodFlow
             }
         }
 
+        public decimal TotalPrice
+        {
+            get => _totalPrice;
+            set
+            {
+                _totalPrice = value;
+                OnPropertyChanged(nameof(TotalPrice));
+            }
+        }
+
+        private void UpdateTotalPrice()
+        {
+            TotalPrice = CurrentOrder.Items.Sum(item => item.Dish.Price * item.Amount);
+        }
+
         public ICommand AddItemCommand { get; }
         public ICommand NewOrderCommand { get; }
         public ICommand CancelOrderCommand { get; }
@@ -79,7 +97,7 @@ namespace FoodFlow
         public ICommand IncreaseAmountCommand { get; }
         public ICommand DecreaseAmountCommand { get; }
         public ICommand SelectDishCommand { get; }
-
+        public ICommand CompleteOrderCommand { get; }
 
         public MainViewModel()
         {
@@ -91,6 +109,7 @@ namespace FoodFlow
             IncreaseAmountCommand = new RelayCommand<OrderItemViewModel>(IncreaseAmount);
             DecreaseAmountCommand = new RelayCommand<OrderItemViewModel>(DecreaseAmount);
             SelectDishCommand = new RelayCommand<Dish>(AddItem); // Здесь вы используете AddItem
+            CompleteOrderCommand = new RelayCommand(OnCompleteOrder);
 
             //new
             Dishes = new ObservableCollection<Dish>(_dishesRepository.GetAll());
@@ -106,16 +125,6 @@ namespace FoodFlow
 
         private void AddItem(Dish dish)
         {
-            /*            // Добавляем новый элемент в коллекцию
-                        CurrentOrder!.Items.Add(new OrderItem
-                        {
-                            Dish = _dishesRepository.GetAll().Skip(Random.Shared.Next(10)).First(),
-                            Amount = 1
-                        });
-
-                        // Уведомляем об изменении свойства CurrentOrder
-                        OnPropertyChanged(nameof(CurrentOrder));*/
-
             CurrentView = new ViewModels.Layout.AddDishLayoutViewModel();
 
             if (dish != null && CurrentOrder != null)
@@ -126,6 +135,8 @@ namespace FoodFlow
                     Dish = dish,
                     Amount = 1
                 });
+
+                UpdateTotalPrice(); // Обновляем общую стоимость
 
                 // Уведомляем об изменении свойства CurrentOrder
                 OnPropertyChanged(nameof(CurrentOrder));
@@ -140,20 +151,24 @@ namespace FoodFlow
         {
             CurrentOrder!.Items.Remove(item);
             OnPropertyChanged(nameof(CurrentOrder));
+            UpdateTotalPrice(); // Обновляем общую стоимость
         }
 
         // Метод для очистки заказа
         private void ClearOrder()
         {
             CurrentOrder?.Items.Clear();
+            TotalPrice = 0; // Обнуляем общую стоимость
             OnPropertyChanged(nameof(CurrentOrder));
         }
 
+        // Метод для отмены заказа
         private void CancelOrder()
         {
             //CurrentOrder.Clear();
 
             CurrentOrder = null;
+            TotalPrice = 0; // Обнуляем общую стоимость
             CurrentView = new WellcomeLayoutViewModel();
         }
 
@@ -162,6 +177,7 @@ namespace FoodFlow
             if (item != null)
             {
                 item.Amount++;
+                UpdateTotalPrice(); // Обновляем общую стоимость
             }
         }
 
@@ -170,6 +186,7 @@ namespace FoodFlow
             if (item != null && item.Amount > 1)
             {
                 item.Amount--;
+                UpdateTotalPrice(); // Обновляем общую стоимость
             }
         }
 
@@ -189,6 +206,12 @@ namespace FoodFlow
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OnCompleteOrder()
+        {
+            // Логика завершения заказа, например, отправка на сервер или очистка заказа
+           
         }
     }
 }

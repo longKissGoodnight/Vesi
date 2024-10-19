@@ -8,6 +8,6 @@
         public ServingMethod Serving { get;set;}
         public DishType Type { get; set; }
         public static Dish Empty { get; private set; } = new Dish();
-        public float Price { get; set; }
+        public decimal Price { get; set; }
     }
 }

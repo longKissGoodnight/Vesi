@@ -36,16 +36,26 @@
             <ContentControl Content="{Binding CurrentView}" DataContext="{Binding}" />
         </Border>
 
-        <!-- Нижний футер с временем -->
+        <!-- Нижний футер с временем и общей стоимостью -->
         <Border Grid.Row="2" Background="#4A90E2" CornerRadius="10,10,0,0" Effect="{DynamicResource DropShadowEffect}">
             <Grid>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="White">
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="Информация о системе | Время: {0}">
-                            <Binding Path="CurrentTime"/>
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock FontSize="16" FontWeight="Bold" Foreground="White" Margin="10,0,0,0">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Информация о системе | Время: {0}">
+                                <Binding Path="CurrentTime"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+
+                    <!-- Добавляем TextBlock для отображения TotalPrice -->
+                    <TextBlock FontSize="16" FontWeight="Bold" Foreground="White" Margin="20,0,0,0">
+                        <TextBlock.Text>
+                            <Binding Path="TotalPrice" StringFormat=" | Общая стоимость: {0:F2}" />
+                            <!-- Форматируем как валюту -->
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>
