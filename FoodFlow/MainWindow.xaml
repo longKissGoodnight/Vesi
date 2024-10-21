@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:FoodFlow.ViewModels"
         xmlns:local="clr-namespace:FoodFlow"
+        xmlns:converters="clr-namespace:FoodFlow.Converters"
         mc:Ignorable="d"
         Title="Терминал формирования заказов" Height="720" Width="1180"
         WindowStartupLocation="CenterScreen"
@@ -12,7 +13,16 @@
 
     <Window.DataContext>
         <local:MainViewModel/>
+        
     </Window.DataContext>
+
+    <Window.Resources>
+        <!-- Эффект тени для элементов -->
+        <DropShadowEffect x:Key="DropShadowEffect" ShadowDepth="5" Color="Black" Opacity="0.2" BlurRadius="10" />
+
+        <!-- Конвертер для изменения видимости -->
+        <converters:ViewToVisibilityConverter x:Key="ViewToVisibilityConverter" />
+    </Window.Resources>
 
     <Grid>
         <!-- Верхний заголовок -->
@@ -48,11 +58,11 @@
                         </TextBlock.Text>
                     </TextBlock>
 
-                    <!-- Добавляем TextBlock для отображения TotalPrice -->
-                    <TextBlock FontSize="16" FontWeight="Bold" Foreground="White" Margin="20,0,0,0">
+                    <!-- Добавляем TextBlock для отображения TotalPrice с привязкой видимости -->
+                    <TextBlock FontSize="16" FontWeight="Bold" Foreground="White" Margin="20,0,0,0"
+                               Visibility="{Binding CurrentView, Converter={StaticResource ViewToVisibilityConverter}}">
                         <TextBlock.Text>
                             <Binding Path="TotalPrice" StringFormat=" | Общая стоимость: {0:F2}" />
-                            <!-- Форматируем как валюту -->
                         </TextBlock.Text>
                     </TextBlock>
                 </StackPanel>
@@ -60,9 +70,5 @@
         </Border>
     </Grid>
 
-    <Window.Resources>
-        <!-- Эффект тени для элементов -->
-        <DropShadowEffect x:Key="DropShadowEffect" ShadowDepth="5" Color="Black" Opacity="0.2" BlurRadius="10" />
-    </Window.Resources>
-
+    
 </Window>

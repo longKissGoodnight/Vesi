@@ -86,11 +86,19 @@ namespace FoodFlow
 
         private void UpdateTotalPrice()
         {
-            TotalPrice = CurrentOrder.Items.Sum(item => item.Dish.Price * item.Amount);
+            if (CurrentOrder != null)
+            {
+                TotalPrice = CurrentOrder.Items.Sum(item => item.Dish.Price * item.Amount);
+            }
+            else
+            {
+                TotalPrice = 0; // или другое значение по умолчанию
+            }
         }
 
         public ICommand AddItemCommand { get; }
         public ICommand NewOrderCommand { get; }
+        public ICommand ViewOrderCommand {  get; }
         public ICommand CancelOrderCommand { get; }
         public ICommand RemoveItemCommand { get; }
         public ICommand ClearOrderCommand { get; }
@@ -101,10 +109,14 @@ namespace FoodFlow
 
         public MainViewModel()
         {
+
+            _dishes = new ObservableCollection<Dish>(_dishesRepository.GetAll());
+
             AddItemCommand = new RelayCommand<Dish>(AddItem);
             RemoveItemCommand = new RelayCommand<OrderItemViewModel>(RemoveItem);
             ClearOrderCommand = new RelayCommand(ClearOrder);
             NewOrderCommand = new RelayCommand(NewOrder);
+            ViewOrderCommand = new RelayCommand(ViewOrder);
             CancelOrderCommand = new RelayCommand(CancelOrder);
             IncreaseAmountCommand = new RelayCommand<OrderItemViewModel>(IncreaseAmount);
             DecreaseAmountCommand = new RelayCommand<OrderItemViewModel>(DecreaseAmount);
@@ -200,6 +212,11 @@ namespace FoodFlow
         {
             CurrentOrder = new OrderViewModel();
             CurrentView = new ViewModels.Layout.OrderLayoutViewModel();
+        }
+
+        private void ViewOrder()
+        {
+            CurrentView = new ViewModels.Layout.HistoryOrderLayoutViewModel();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

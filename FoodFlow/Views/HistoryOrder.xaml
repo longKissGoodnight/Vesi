@@ -35,16 +35,15 @@
         </Style.Triggers>
     </Style>
 
-    <DataTemplate DataType="{x:Type layout:OrderLayoutViewModel}">
+    <DataTemplate DataType="{x:Type layout:HistoryOrderLayoutViewModel}">
         <Grid DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Window}}"
               Background="#F9F9F9" >
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="0"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
-
 
             <ListBox Grid.Row="1" ItemsSource="{Binding CurrentOrder.Items}" 
                      BorderBrush="#A8A8A8" BorderThickness="1" 
@@ -65,52 +64,15 @@
                                 <TextBlock Text="Количество: " FontSize="12" VerticalAlignment="Center" />
                                 <TextBlock Text="{Binding Amount}" FontSize="12" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0" />
 
-                                <!-- Кнопки увеличения и уменьшения количества -->
-                                <Button Command="{Binding DataContext.IncreaseAmountCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                        CommandParameter="{Binding}"
-                                        Content="+" FontWeight="Bold" Width="30" Height="30"
-                                        VerticalAlignment="Center" 
-                                        Style="{StaticResource RoundedButtonStyle}"/>
-
-                                <Button Command="{Binding DataContext.DecreaseAmountCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                        CommandParameter="{Binding}"
-                                        Content="-" FontWeight="Bold" Width="30" Height="30"
-                                        VerticalAlignment="Center" 
-                                        Style="{StaticResource RoundedButtonStyle}"/>
-
-                                <!-- Кнопка удаления элемента -->
-                                <Button Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                        CommandParameter="{Binding}" Content="Удалить"
-                                        Background="Red" Foreground="White"
-                                        Width="70" Height="30" VerticalAlignment="Center" Margin="10,0,0,0" 
-                                        Style="{StaticResource RoundedButtonStyle}"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-
             </ListBox>
-
-            <!-- Разметка для кнопок управления заказом -->
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <!-- Кнопка "Отменить заказ" -->
-                <Button Content="Отменить заказ" Command="{Binding CancelOrderCommand}" 
+                <Button Content="Отменить" Command="{Binding CancelOrderCommand}" 
                         FontSize="20" Margin="10" Width="180" Height="50"
-                        Style="{StaticResource RoundedButtonStyle}"/>
-
-                <!-- Кнопка "Добавить блюдо" -->
-                <Button Content="Добавить блюдо" Command="{Binding AddItemCommand}" 
-                        FontSize="20" Margin="10" Width="200" Height="50"
-                        Style="{StaticResource RoundedButtonStyle}"/>
-
-                <!-- Кнопка "Очистить" -->
-                <Button Content="Очистить" Command="{Binding ClearOrderCommand}" 
-                        FontSize="20" Margin="10" Width="150" Height="50"
-                        Style="{StaticResource RoundedButtonStyle}"/>
-                
-                <!-- Кнопка "Закончить заказ" -->
-                <Button Content="Закончить заказ" Command="{Binding CompleteOrderCommand}"
-                        FontSize="20" Margin="10" Width="200" Height="50"
                         Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
         </Grid>

@@ -24,7 +24,7 @@
             <!-- Secondary Options -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
                 <Border Background="#E8E8E8" CornerRadius="5" Margin="5" Width="150">
-                    <Button Command="{Binding ViewOrdersCommand}" FontSize="16" Padding="5" Background="Transparent" Foreground="#4A90E2" BorderThickness="0">
+                    <Button Command="{Binding ViewOrderCommand}" FontSize="16" Padding="5" Background="Transparent" Foreground="#4A90E2" BorderThickness="0">
                         Посмотреть заказы
                     </Button>
                 </Border>

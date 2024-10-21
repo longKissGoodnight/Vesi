@@ -8,6 +8,7 @@
                 <ResourceDictionary Source="./Views/Order.xaml"/>
                 <ResourceDictionary Source="./Views/Wellcome.xaml"/>
                 <ResourceDictionary Source="./Views/AddDishView.xaml"/>
+                <ResourceDictionary Source="./Views/HistoryOrder.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
