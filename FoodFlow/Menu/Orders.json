@@ -1,117 +1,19 @@
 [
   {
     "OrderNumber": 1,
-    "CreateTime": "2024-10-22T18:35:09.7657934+03:00",
-    "TotalPrice": 15.47,
+    "CreateTime": "2024-10-22T20:07:07.9547448+03:00",
+    "TotalPrice": 15.96,
     "Items": [
       {
         "Dish": {
           "Id": 4,
           "Name": "Пюре картофельное",
           "Description": "Нежное картофельное пюре с маслом.",
-          "Serving": 0,
-          "Type": 3,
+          "Serving": "Weight",
+          "Type": "SideDish",
           "Price": 3.99
         },
-        "Amount": 3
-      },
-      {
-        "Dish": {
-          "Id": 10,
-          "Name": "Огуречный салат",
-          "Description": "Свежий огуречный салат с укропом и уксусом.",
-          "Serving": 0,
-          "Type": 0,
-          "Price": 3.50
-        },
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "OrderNumber": 2,
-    "CreateTime": "2024-10-22T18:54:46.2912299+03:00",
-    "TotalPrice": 6.49,
-    "Items": [
-      {
-        "Dish": {
-          "Id": 5,
-          "Name": "Апельсиновый сок",
-          "Description": "Свежевыжатый апельсиновый сок.",
-          "Serving": 1,
-          "Type": 4,
-          "Price": 2.50
-        },
-        "Amount": 1
-      },
-      {
-        "Dish": {
-          "Id": 4,
-          "Name": "Пюре картофельное",
-          "Description": "Нежное картофельное пюре с маслом.",
-          "Serving": 0,
-          "Type": 3,
-          "Price": 3.99
-        },
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "OrderNumber": 3,
-    "CreateTime": "2024-10-22T19:02:41.1968306+03:00",
-    "TotalPrice": 32.47,
-    "Items": [
-      {
-        "Dish": {
-          "Id": 5,
-          "Name": "Апельсиновый сок",
-          "Description": "Свежевыжатый апельсиновый сок.",
-          "Serving": 1,
-          "Type": 4,
-          "Price": 2.50
-        },
-        "Amount": 1
-      },
-      {
-        "Dish": {
-          "Id": 3,
-          "Name": "Курица-гриль",
-          "Description": "Куриное филе, приготовленное на гриле с травами и специями.",
-          "Serving": 1,
-          "Type": 2,
-          "Price": 9.99
-        },
-        "Amount": 3
-      }
-    ]
-  },
-  {
-    "OrderNumber": 4,
-    "CreateTime": "2024-10-22T19:03:00.0247088+03:00",
-    "TotalPrice": 22.49,
-    "Items": [
-      {
-        "Dish": {
-          "Id": 3,
-          "Name": "Курица-гриль",
-          "Description": "Куриное филе, приготовленное на гриле с травами и специями.",
-          "Serving": 1,
-          "Type": 2,
-          "Price": 9.99
-        },
-        "Amount": 1
-      },
-      {
-        "Dish": {
-          "Id": 5,
-          "Name": "Апельсиновый сок",
-          "Description": "Свежевыжатый апельсиновый сок.",
-          "Serving": 1,
-          "Type": 4,
-          "Price": 2.50
-        },
-        "Amount": 5
+        "Amount": 4
       }
     ]
   }

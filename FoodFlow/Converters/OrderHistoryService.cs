@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Encodings.Web;
 using FoodFlow.Models;
 using FoodFlow.ViewModels;
+using System.Text.Json.Serialization;
 
 namespace FoodFlow.Services
 {
@@ -46,12 +47,16 @@ namespace FoodFlow.Services
             };
             orders.Add(order);
 
+
+
+
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
                 DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
                 Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping // Это позволит сохранять русские символы без экранирования
             };
+            options.Converters.Add(new JsonStringEnumConverter());
 
             using (var writer = new StreamWriter(_filePath, false, new UTF8Encoding(false))) // false означает не использовать BOM
             {
