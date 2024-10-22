@@ -19,7 +19,9 @@ namespace FoodFlow
 
         private decimal _totalPrice;
 
+        private readonly OrderHistoryService _orderHistoryService;
 
+        
         //New
         public ObservableCollection<Dish> Dishes
         {
@@ -133,6 +135,7 @@ namespace FoodFlow
             _timerService.TimeUpdated += UpdateTime;
             _currentTime = DateTime.Now.ToString("HH:mm:ss");
 
+            _orderHistoryService = new OrderHistoryService();
         }
 
         private void AddItem(Dish dish)
@@ -228,7 +231,18 @@ namespace FoodFlow
         private void OnCompleteOrder()
         {
             // Логика завершения заказа, например, отправка на сервер или очистка заказа
-           
+            if (CurrentOrder != null && CurrentOrder.Items.Any())
+            {
+                // Сохраняем заказ
+                _orderHistoryService.SaveOrder(CurrentOrder, TotalPrice);
+
+                // Очищаем текущий заказ
+                CurrentOrder = null;
+                TotalPrice = 0;
+
+                // Возвращаемся на главный экран
+                CurrentView = new WellcomeLayoutViewModel();
+            }
         }
     }
 }

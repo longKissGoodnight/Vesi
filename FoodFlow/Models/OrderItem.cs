@@ -2,8 +2,12 @@
 {
     public class OrderItem
     {
-        public Dish Dish { get; set; } = Dish.Empty;
+/*        public Dish Dish { get; set; } = Dish.Empty;
 
+        public int Amount { get; set; }*/
+
+        public Dish Dish { get; set; } = Dish.Empty;
         public int Amount { get; set; }
+
     }
 }
