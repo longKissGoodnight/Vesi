@@ -38,7 +38,7 @@
     <DataTemplate DataType="{x:Type layout:OrderLayoutViewModel}">
         <Grid DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Window}}"
               Background="#F9F9F9" >
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="0"/>
                 <RowDefinition Height="*"/>
@@ -81,7 +81,7 @@
                                 <!-- Кнопка удаления элемента -->
                                 <Button Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                         CommandParameter="{Binding}" Content="Удалить"
-                                        Background="Red" Foreground="White"
+                                        Background="DarkRed" Foreground="White"
                                         Width="70" Height="30" VerticalAlignment="Center" Margin="10,0,0,0" 
                                         Style="{StaticResource RoundedButtonStyle}"/>
                             </StackPanel>
@@ -96,6 +96,13 @@
                 <!-- Кнопка "Отменить заказ" -->
                 <Button Content="Отменить заказ" Command="{Binding CancelOrderCommand}" 
                         FontSize="20" Margin="10" Width="180" Height="50"
+                        Background="DarkRed" Foreground="White"
+                        Style="{StaticResource RoundedButtonStyle}"/>
+
+                <!-- Кнопка "Очистить" -->
+                <Button Content="Очистить" Command="{Binding ClearOrderCommand}" 
+                        FontSize="20" Margin="10" Width="150" Height="50"
+                        Background="DarkGoldenrod" Foreground="White"
                         Style="{StaticResource RoundedButtonStyle}"/>
 
                 <!-- Кнопка "Добавить блюдо" -->
@@ -103,14 +110,11 @@
                         FontSize="20" Margin="10" Width="200" Height="50"
                         Style="{StaticResource RoundedButtonStyle}"/>
 
-                <!-- Кнопка "Очистить" -->
-                <Button Content="Очистить" Command="{Binding ClearOrderCommand}" 
-                        FontSize="20" Margin="10" Width="150" Height="50"
-                        Style="{StaticResource RoundedButtonStyle}"/>
-                
+
                 <!-- Кнопка "Закончить заказ" -->
                 <Button Content="Закончить заказ" Command="{Binding CompleteOrderCommand}"
                         FontSize="20" Margin="10" Width="200" Height="50"
+                        Background="Green" Foreground="White"
                         Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
         </Grid>
